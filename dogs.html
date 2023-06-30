@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dogs Data</title>
+</head>
+<style>
+    .btn {
+        font-size: 1rem;
+        background-color: rgb(166, 38, 38);
+        color: white;
+        border-radius: 10rem;
+        padding: .7rem 1rem;
+        margin: 1rem;
+        box-shadow: 2rem;
+    }
+
+    .btn:hover {
+        cursor: pointer;
+    }
+
+    .div1,
+    .div2 {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    .div1 img {
+        height: 280px;
+        border: 4px solid #010101;
+        border-radius: 10%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        filter: grayscale(100%);
+        transition: filter 0.3s ease;
+    }
+
+    .div1 img:hover {
+        filter: none;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    nav {
+        background-color: rgb(166, 38, 38);
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    nav .brand {
+        color: white;
+        font-size: 25px;
+        margin-left: 20px;
+    }
+</style>
+
+<body>
+
+    <nav>
+        <div class="brand">Dogs</div>
+    </nav>
+
+    <div class="container">
+        <div class="div1">
+            <img id="image" src="" />
+        </div>
+        <br />
+        <div class="div2">
+            <button class="btn" onclick="fetching_dogs_data()">Load Random Image</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    // const inputValue = document.getElementById('input').value;
+    function fetching_dogs_data() {
+        const apiUrl = `https://dog.ceo/api/breeds/image/random`;
+        fetch(apiUrl)
+            .then(function (response) {
+                return response.json();
+            })
+
+            .then(function (data) {
+                displayImage(data.message);
+            })
+
+            .catch(function (error) {
+                console.log("Error: ", error);
+            })
+    }
+
+    function displayImage(image) {
+        document.getElementById("image").src = image;
+    }
+</script>
+
+</html>
